@@ -1,6 +1,6 @@
-# My Paper Title
+# Learning Primal Heuristics for Mixed Integer Programs
 
-This repository is the official implementation of Learning Primal Heuristics for Mixed IntegerPrograms
+This repository is the official implementation of Learning Primal Heuristics for Mixed Integer Programs
 
 > 📋Optional: include a graphic explaining your approach/main result, bibtex entry, link to demos, blog posts and tutorials
 
