@@ -1,12 +1,14 @@
 # Learning Primal Heuristics for Mixed Integer Programs
 
-This repository is the official implementation of Learning Primal Heuristics for Mixed Integer Programs
+This repository contains the experiment code for the paper submission: Learning Primal Heuristics for Mixed Integer Programs
 
-> 📋Optional: include a graphic explaining your approach/main result, bibtex entry, link to demos, blog posts and tutorials
 
 ## Requirements
 
-To install requirements:
+We use python version 3.6.9 and c++ version 11.
+
+#### To install python dependencies:
+
 
 ```setup
 pip install -r requirements.txt
