@@ -46,6 +46,6 @@ The testing results is output to the folder 'ret_model'. These results correspon
 
 - Run the bash script './model_predict.sh' to produce solution predictions for the proposed heuristic. Or skip this step and use the provided solution predictions in the dataset.
 
-- Run the bash script ./heur_eval.sh. It takes several hours to obtain the results. Please note that if each process should run on a single cpu.
+- Run the bash script ./heur_eval.sh. It takes several hours to obtain the results. Please note that if each process should run on a single cpu. The intermediate results is output to the folder ret_solver.
 
-- Upon the previous step is finished, run the python script 'stats.py' (under tf1 environment) to generate the mean statistics, which is output to folder 'ret_solver'. These results correspond to the statistics in Table 2 and Table 3 of our paper. 
+- Upon the previous step is finished, run the bash script './calc_stats.sh' (under tf1 environment) to generate the mean statistics, which is output to folder 'ret_solver'. These results correspond to the statistics in Table 2 and Table 3 of our paper. 

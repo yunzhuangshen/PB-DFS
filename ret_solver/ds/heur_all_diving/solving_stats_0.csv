@@ -1,9 +1,0 @@
-instance_id,status,opt_gap,best_sol_obj,best_sol_time,best_sol_heur,best_heur_sol_obj,best_heur_sol_time,heur_ncalls,heur_tot_time
-eval_large/0,unsolved,0.616054,781,48.1133,none,0,0,0,5.9e-05
-eval_large/1,unsolved,0.602009,748,30.9125,none,0,0,0,6e-05
-eval_large/2,unsolved,0.576095,707,49.1975,none,0,0,0,4.2e-05
-eval_large/3,unsolved,0.577351,710,19.5912,none,0,0,0,5.1e-05
-eval_large/4,unsolved,0.0484529,312,44.6859,none,0,0,0,0.004812
-eval_large/5,unsolved,0.603958,790,47.6222,none,0,0,0,4.6e-05
-eval_large/6,unsolved,0.61925,805,49.9265,none,0,0,0,3.9e-05
-eval_large/7,unsolved,0.0470351,312,47.3136,none,0,0,0,0.007011
