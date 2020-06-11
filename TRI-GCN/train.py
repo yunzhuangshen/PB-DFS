@@ -35,24 +35,15 @@ tf.random.set_seed(seed)
 
 if __name__ == '__main__':
 
-    data_dirs = {
-        'tsp': 'train_50-100', 'vrp': 'train_16-25', 
-        'mis': 'train_500-1000', 'sc': 'train_750_550_1.5',
-        'vc': 'train_500-1000',
-        'ds': 'train_500-1000',
-        'ca': 'train_100-500-1.5',
-    }
-
-    data_dir = data_dirs[args.problem]
     home = expanduser("~")
-    save_model_to = os.path.join(home, f'storage/trained_models/{args.problem}/{data_dir}/gcnlp')
+    save_model_to = f'../trained_models/{args.problem}/TRIG-GCN')
     os.makedirs(save_model_to, exist_ok=True)
     ####### model #######
     col_dim = 57; row_dim = 26;     
     model = GCN( output_dim=2)
 
     ####### data #######
-    data_path = os.path.join(home, f"storage1/instances/{args.problem}/{data_dir}")    
+    data_path = f'../datasets/{args.problem}/train')    
     data_files = list(pathlib.Path(data_path).glob('sample_*.pkl'))
     data_files = [str(data_file) for data_file in data_files][:500]
 

@@ -5,58 +5,42 @@ This repository contains the experiment code for the paper submission: Learning 
 
 ## Requirements
 
-We use python version 3.6.9 and c++ version 11.
+#### Python Code Dependencies 
+1. We use python version 3.6.9.
+2. Install python3-venv by 'sudo apt-get install python3-venv'
+3. We need to create two virtual environments that contain different version of tensorflow, namely tf1 and tf2.
+4. Under the environment tf1, run 'pip3 install -r requirements_1.txt'
+5. Under the environment tf2, run 'pip3 install -r requirements_2.txt'
 
-#### To install python dependencies:
+#### C++ Code Dependencies
+1. C++ boost library is required. The library can be downloaded here https://www.boost.org/users/download/.
+2. SCIP solver **version 6.0.1** is required, which can be downloaded at https://www.scipopt.org/index.php#download. An academic license can be applied from https://www.scipopt.org/index.php#license.
+3. After the setup, build the c++ code with cmake by 'cd build && cmake ../ && make -j4' to obtain the execuable 'CO'.
 
 
-```setup
-pip install -r requirements.txt
-```
+#### Data Dependencies
+The data is available at . The datasets repository should be put under the root directory of the project.
 
-> 📋Describe how to set up the environment, e.g. pip/conda/docker commands, download datasets, etc...
+## Model Training
 
-## Training
+- To train GG-GCN, XGBoost, and LR models, we first activate the tf1 environment. Then run the bash script ./model_train.sh.
 
-To train the model(s) in the paper, run this command:
-
-```train
-python train.py --input-data <path_to_data> --alpha 10 --beta 20
-```
-
-> 📋Describe how to train the models, with example commands on how to train the models in your paper, including the full training procedure and appropriate hyperparameters.
-
-## Evaluation
-
-To evaluate my model on ImageNet, run:
-
-```eval
-python eval.py --model-file mymodel.pth --benchmark imagenet
-```
-
-> 📋Describe how to evaluate the trained models on benchmarks reported in the paper, give commands that produce the results (section below).
+- To train TRIG-GCN model, we active the tf2 environment. Then run the bash script ./model_train_trig_gcn.sh
 
 ## Pre-trained Models
 
-You can download pretrained models here:
+We provide the pre-trained models for each problem under the folder 'trained_models'
 
-- [My awesome model](https://drive.google.com/mymodel.pth) trained on ImageNet using parameters x,y,z. 
+## Model Testing
 
-> 📋Give a link to where/how the pretrained models can be downloaded and how they were trained (if applicable).  Alternatively you can have an additional column in your results table with a link to the models.
+- To test GG-GCN, XGBoost, and LR models, we first activate the tf1 environment. Then run the bash script './model_test.sh'.
 
-## Results
+- To test TRIG-GCN model, we active the tf2 environment. Then run the bash script './model_test_trig_gcn.sh'.
 
-Our model achieves the following performance on :
+The testing results is output to the folder 'ret_model'. These results corresponds to the results presented in Table 1 of our paper.
 
-### [Image Classification on ImageNet](https://paperswithcode.com/sota/image-classification-on-imagenet)
+## Evaluation of Heuristics
 
-| Model name         | Top 1 Accuracy  | Top 5 Accuracy |
-| ------------------ |---------------- | -------------- |
-| My awesome model   |     85%         |      95%       |
+- Run the bash script ./heur_eval.sh. It takes several hours to obtain the results.
 
-> 📋Include a table of results from your paper, and link back to the leaderboard for clarity and context. If your main result is a figure, include that figure and link to the command or notebook to reproduce it. 
-
-
-## Contributing
-
-> 📋Pick a licence and describe how to contribute to your code repository. 
+- Upon the previous step is finished, run the python script 'stats.py' to generate the mean statistics, which is output to folder 'ret_solver'. These results correspond to the statistics in Table 2 and Table 3 of our paper. 

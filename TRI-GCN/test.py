@@ -18,37 +18,20 @@ assert tf.__version__.startswith('2.')
 
 
 if __name__ == '__main__':
-
-    train_dirs = {
-        'tsp': 'train_50-100', 'vrp': 'train_16-25', 
-        'mis': 'train_500-1000', 'sc': 'train_750_550_1.5',
-        'vc': 'train_500-1000',
-        'ds': 'train_500-1000',
-        'ca': 'train_100-500-1.5',
-    }
-
-    data_dirs = {
-        'tsp': ['test_100', 'test_150'], 
-        'vrp': ['test_25', 'test_30'], 
-        'mis': ['test_1000', 'test_3000'], 
-        'sc': ['test_1125_825', 'test_1500_1100'],
-        'vc': ['test_1000', 'test_2000'],
-        'ds': ['test_1000', 'test_2000'],
-        'ca': ['test_150-750', 'test_200-1000']
-    }
     
     home = expanduser("~")
-    model_dir = os.path.join(home, f'storage/trained_models/{args.problem}/{train_dirs[args.problem]}/gcnlp')
+    model_dir = f'../trained_models/{args.problem}/TRIG-GCN')
     model = GCN( output_dim=2)
     model.load_weights(f'{model_dir}/model.ckpt')
 
     ####### data #######
 
-    for data_dir in data_dirs[args.problem]:
-        data_path = os.path.join(home, f"storage1/instances/{args.problem}/{data_dir}")    
+    for data_dir in ['test_small', 'test_medium']:
+        data_path = f'../datasets/{args.problem}/{data_dir}''    
         data_files = list(pathlib.Path(data_path).glob('sample_*.pkl'))
         data_files = [str(data_file) for data_file in data_files][:100]
-        logfile = os.path.join(model_dir, data_dir) + '.log'
+        os.makedirs(f'../ret_model', exist_ok=True)
+        logfile = f'../ret_model/{args.problem}_{data_dir}_TRIG_GCN.txt'
         nsamples = len(data_files)
         
         log(f'test dataset: <{data_path}>, number of instances: {nsamples}', logfile)

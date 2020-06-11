@@ -4,8 +4,6 @@ from __future__ import print_function
 import sys
 import os
 sys.path.append( f'{os.path.dirname(os.path.realpath(__file__))}/gcn')
-# add the libary path for graph reduction and local search
-# sys.path.append( '%s/kernel' % os.path.dirname(os.path.realpath(__file__)) )
 from os.path import expanduser
 home = expanduser("~")
 import time
@@ -67,33 +65,12 @@ if __name__ == '__main__':
 
     parser.add_argument(
         'problem',
-        choices=['tsp', 'vrp', 'sc', 'mis', 'ds', 'vc', 'ca'],
+        choices=['mis', 'ds', 'vc', 'ca'],
     )
 
-    parser.add_argument(
-        'feature',
-        choices=['lp', 'single'],
-    )
-
-    train_dirs = {
-        'tsp': 'train_50-100', 'vrp': 'train_16-25', 
-        'mis': 'train_500-1000', 'sc': 'train_750_550_1.5',
-        'vc' : 'train_500-1000', 'ds' : 'train_500-1000',
-        'ca': 'train_100-500-1.5',
-    }
-
-    data_dirs = {
-        'tsp': ['eval_200'], 
-        'vrp': ['eval_50'], 
-        'mis': ['eval_3000'], 
-        'sc': ['eval_1500_1100', 'eval_2250_1750'],
-        'vc': ['eval_3000'],
-        'ds': ['eval_3000'],
-        'ca': ['eval_300-1500']
-    }
     args = parser.parse_args()
 
-    feat_dim = 57 if args.feature == 'lp' else 32
+    feat_dim = 57
     # Define placeholders
     placeholders = {
         'support': [tf.sparse_placeholder(tf.float32) for _ in range(num_supports)] 
@@ -108,53 +85,41 @@ if __name__ == '__main__':
     # Create model
     model = model_func(placeholders, input_dim=N_bd, logging=True)
 
-    if args.problem == 'tsp':
-        read_data = read_data_tsp
-    elif args.problem == 'vrp':
-        read_data = read_data_vrp
-    elif args.problem in ['mis', 'ds', 'vc', 'ca'] :
-        read_data = read_data_general
-    elif args.problem == 'sc':
-        read_data = read_data_sc
-    else:
-        raise Exception('unknown problem!')
-
     args = parser.parse_args()
     home = expanduser("~")
-    model_dir = os.path.join(home, f'storage/trained_models/{args.problem}/{train_dirs[args.problem]}/gcng_{args.feature}')
+    model_dir = os.path.join(home, f'../trained_models/{args.problem}/GG-GCN')
 
-    for data_dir in data_dirs[args.problem]:
-        data_path = os.path.join(home, f"storage1/instances/{args.problem}/{data_dir}")    
-        data_files = [f'{data_path}/sample_{i}.pkl' for i in range(30)]
+    data_path = f'../datasets/{args.problem}/eval_large'
+    data_files = [f'{data_path}/sample_{i}.pkl' for i in range(30)]
 
-        saver=tf.train.Saver(max_to_keep=1000)
-        sess.run(tf.global_variables_initializer())
-        ckpt=tf.train.get_checkpoint_state(model_dir)
-        print('loaded '+ckpt.model_checkpoint_path)
-        saver.restore(sess,os.path.join(home, ckpt.model_checkpoint_path))
+    saver=tf.train.Saver(max_to_keep=1000)
+    sess.run(tf.global_variables_initializer())
+    ckpt=tf.train.get_checkpoint_state(model_dir)
+    print('loaded '+ckpt.model_checkpoint_path)
+    saver.restore(sess,os.path.join(home, ckpt.model_checkpoint_path))
 
-        t1 = time.time()
-        ct=0
-        for data_file in data_files:
-            print('processing data file ' + data_file + '\n')
-            data = read_data(data_file, lp_feat = (args.feature =='lp'))
+    t1 = time.time()
+    ct=0
+    for data_file in data_files:
+        print('processing data file ' + data_file + '\n')
+        data = read_data_general(data_file, lp_feat = (args.feature =='lp'))
 
-            ct += 1
-            xs, ys, adj, names, = data
-        
-            if FLAGS.matrix_type == 'sparse':
-                xs = sparse_to_tuple(sp.lil_matrix(xs))
-                support = simple_polynomials(adj, FLAGS.max_degree)  if FLAGS.model == 'gcn_cheby' else [preprocess_adj_sparse(adj)]
-            else:
-                support = simple_polynomials_to_dense(adj, FLAGS.max_degree)  if FLAGS.model == 'gcn_cheby' else [preprocess_adj(adj)]
+        ct += 1
+        xs, ys, adj, names, = data
+    
+        if FLAGS.matrix_type == 'sparse':
+            xs = sparse_to_tuple(sp.lil_matrix(xs))
+            support = simple_polynomials(adj, FLAGS.max_degree)  if FLAGS.model == 'gcn_cheby' else [preprocess_adj_sparse(adj)]
+        else:
+            support = simple_polynomials_to_dense(adj, FLAGS.max_degree)  if FLAGS.model == 'gcn_cheby' else [preprocess_adj(adj)]
 
-            _, z_out = evaluate(xs, support, placeholders)
+        _, z_out = evaluate(xs, support, placeholders)
 
-            prob_map = z_out[:, 1].tolist()
-            assert(len(names) == len(prob_map))
-            # write probability map to file
-            with open(data_file[:-3] + 'prob', 'w+') as f:
-                print('write to ' + data_file[:-3] + 'prob')
-                for varname, prob in zip(names, prob_map):
-                    f.write(f'{varname} {prob}\n')
-        print(f'average time used: {(time.time() - t1)/len(data_files)}')
+        prob_map = z_out[:, 1].tolist()
+        assert(len(names) == len(prob_map))
+        # write probability map to file
+        with open(data_file[:-3] + 'prob', 'w+') as f:
+            print('write to ' + data_file[:-3] + 'prob')
+            for varname, prob in zip(names, prob_map):
+                f.write(f'{varname} {prob}\n')
+    print(f'average time used: {(time.time() - t1)/len(data_files)}')

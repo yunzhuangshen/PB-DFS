@@ -52,30 +52,16 @@ if __name__ == '__main__':
 
     parser.add_argument(
         'problem',
-        choices=['tsp', 'vrp', 'sc', 'mis', 'vc', 'ds', 'ca'],
+        choices=['mis', 'vc', 'ds', 'ca'],
     )
-
-    parser.add_argument(
-        'feature',
-        choices=['lp', 'single'],
-    )
-
-    data_dirs = {
-        'tsp': 'train_50-100', 'vrp': 'train_16-25', 
-        'mis': 'train_500-1000', 'sc': 'train_750_550_1.5',
-        'vc': 'train_500-1000',
-        'ds': 'train_500-1000',
-        'ca': 'train_100-500-1.5',
-    }
 
     args = parser.parse_args()
-    data_dir = data_dirs[args.problem]
     home = expanduser("~")
-    save_model_to = os.path.join(home, f'storage/trained_models/{args.problem}/{data_dir}/gcng_{args.feature}')
+    save_model_to = f'../trained_models/{args.problem}/GG-GCN'
     os.makedirs(save_model_to, exist_ok=True)
     
     ####### data #######
-    data_path = os.path.join(home, f"storage1/instances/{args.problem}/{data_dir}")    
+    data_path = f"../datasets/{args.problem}/train"    
     data_files = list(pathlib.Path(data_path).glob('sample_*.pkl'))
     data_files = [str(data_file) for data_file in data_files][:500]
     
@@ -91,7 +77,7 @@ if __name__ == '__main__':
         raise Exception('unknown problem!')
 
     ####### model #######
-    feat_dim = 57 if args.feature == 'lp' else 32
+    feat_dim = 57
     FLAGS = set_train_params()
     placeholders = {
         'support': [tf.sparse_placeholder(tf.float32) for _ in range(FLAGS.num_supports)] 
@@ -128,7 +114,7 @@ if __name__ == '__main__':
         for idd in range(samples_per_epoch):
 
             t2 = time.time()
-            data = read_data(data_files[idd], lp_feat = (args.feature =='lp'))
+            data = read_data(data_files[idd], lp_feat = True)
 
             ct += 1
             xs, ys, adj, names = data

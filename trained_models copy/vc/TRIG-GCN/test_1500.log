@@ -1,0 +1,19 @@
+[2020-05-29 04:13:05.782018] test dataset: </home/ubuntu/storage1/instances/vc/test_1500>, number of instances: 76
+[2020-05-29 04:13:05.782225] log write to: </home/ubuntu/storage/trained_models/vc/train_500-1000/gcnlp/test_1500.log>
+[2020-05-29 05:24:21.560696] time per instance: 56.26024170612034
+[2020-05-29 05:24:21.732090] acc: 82.09, ap: 92.47            
+p_0: 82.19, r_0: 77.74, f1_0: 79.86,            
+p_1: 82.09, r_1: 85.75, f1_1: 83.86
+[2020-05-29 05:24:22.148112] percentage vars: 0.8 mean - acc: 88.20, f1_0: 86.30, f1_1: 89.62, p_0: 88.34, p1: 88.19
+percentage vars: 0.8 std - acc: 1.45, f1_0: 2.02, f1_1: 1.19, p_0: 1.82, p1: 1.95
+
+percentage vars: 0.9 mean - acc: 85.23, f1_0: 83.12, f1_1: 86.86, p_0: 85.41, p1: 85.18
+percentage vars: 0.9 std - acc: 1.45, f1_0: 1.95, f1_1: 1.20, p_0: 1.83, p1: 1.89
+
+percentage vars: 0.95 mean - acc: 83.69, f1_0: 81.51, f1_1: 85.39, p_0: 83.85, p1: 83.65
+percentage vars: 0.95 std - acc: 1.44, f1_0: 1.93, f1_1: 1.20, p_0: 1.80, p1: 1.89
+
+percentage vars: 1 mean - acc: 82.09, f1_0: 79.86, f1_1: 83.86, p_0: 82.19, p1: 82.09
+percentage vars: 1 std - acc: 1.43, f1_0: 1.91, f1_1: 1.19, p_0: 1.84, p1: 1.86
+
+

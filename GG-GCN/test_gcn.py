@@ -31,38 +31,15 @@ if __name__ == '__main__':
 
     parser.add_argument(
         'problem',
-        choices=['tsp', 'vrp', 'sc', 'mis', 'vc', 'ds', 'ca'],
+        choices=['mis', 'vc', 'ds', 'ca'],
     )
-
-    parser.add_argument(
-        'feature',
-        choices=['lp', 'single'],
-    )
-
-    train_dirs = {
-        'tsp': 'train_50-100', 'vrp': 'train_16-25', 
-        'mis': 'train_500-1000', 'sc': 'train_750_550_1.5',
-        'vc': 'train_500-1000',
-        'ds': 'train_500-1000',
-        'ca': 'train_100-500-1.5',
-    }
-
-    data_dirs = {
-        'tsp': ['test_100', 'test_150'], 
-        'vrp': ['test_25', 'test_30'], 
-        'mis': ['test_1000', 'test_3000'], 
-        'sc': ['test_1125_825', 'test_1500_1100'],
-        'vc': ['test_1000', 'test_2000'],
-        'ds': ['test_1000', 'test_2000'],
-        'ca': ['test_150-750', 'test_200-1000']
-    }
 
     args = parser.parse_args()
     home = expanduser("~")
-    model_dir = os.path.join(home, f'storage/trained_models/{args.problem}/{train_dirs[args.problem]}/gcng_{args.feature}')
+    model_dir = f'../trained_models/{args.problem}/GG-GCN'
 
     # Settings
-    feat_dim = 57 if args.feature == 'lp' else 32
+    feat_dim = 57
     flags = tf.app.flags
     FLAGS = flags.FLAGS
     flags.DEFINE_string('model', 'gcn_cheby', 'Model string.')  # 'gcn', 'gcn_cheby', 'dense'
@@ -75,9 +52,6 @@ if __name__ == '__main__':
     flags.DEFINE_integer('early_stopping', 1000, 'Tolerance for early stopping (# of epochs).')
     flags.DEFINE_integer('max_degree', 1, 'Maximum Chebyshev polynomial degree.')
     flags.DEFINE_integer('num_layer', 20, 'number of layers.')
-
-    # dense matrix can enjoey tf parallelism
-    # but if the problem have a graph that is too large to fit into memory, we need to use sparse matrix
     flags.DEFINE_string('matrix_type', 'dense', 'Model string.')  # 'sparse', 'dense'
     num_supports = 1 + FLAGS.max_degree
 
@@ -120,11 +94,12 @@ if __name__ == '__main__':
 
     ####### data #######
 
-    for data_dir in data_dirs[args.problem]:
-        data_path = os.path.join(home, f"storage1/instances/{args.problem}/{data_dir}")    
+    for data_dir in ["test_small", 'test_medium']:
+        data_path = f'../datasets/{args.problem}/{data_dir}'    
         data_files = list(pathlib.Path(data_path).glob('sample_*.pkl'))
         data_files = [str(data_file) for data_file in data_files][:100]
-        logfile = os.path.join(model_dir, data_dir) + '.log'
+        os.makedirs(f'../ret_model', exist_ok=True)
+        logfile = f'../ret_model/{args.problem}_{data_dir}_GG_GCN.txt'
         nsamples = len(data_files)
         
         log(f'test dataset: <{data_path}>, number of instances: {nsamples}', logfile)
@@ -139,11 +114,7 @@ if __name__ == '__main__':
         for idd in range(nsamples):
             ct+=1
 
-            # try:
-            data = read_data(data_files[idd], lp_feat = (args.feature =='lp'))
-            # except:
-            #     print(f'exception when loading <{data_files[idd]}>')
-            #     continue
+            data = read_data(data_files[idd], lp_feat = True)
             ct += 1
             xs, ys, adj, names = data
         

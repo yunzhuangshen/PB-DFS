@@ -3,7 +3,7 @@ import  argparse
 parser = argparse.ArgumentParser()
 parser.add_argument(
     'problem',
-    choices=['tsp', 'vrp', 'sc', 'mis', 'ca', 'ds', 'vc'],
+    choices=['mis', 'ca', 'ds', 'vc'],
 )
 
 parser.add_argument('--learning_rate', default=0.01)

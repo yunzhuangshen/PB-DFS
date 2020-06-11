@@ -1,0 +1,19 @@
+[2020-05-30 00:27:53.940049] test problem: vc model: xgb
+[2020-05-30 00:27:53.940328] test dataset: </home/ubuntu/storage1/instances/vc/test_1500>, number of instances: 76
+[2020-05-30 00:27:53.940408] log write to: </home/ubuntu/storage/trained_models/vc/train_500-1000/xgb/test_1500.log>
+[2020-05-30 00:27:54.263375] acc: 75.66, ap: 84.85            
+p_0: 71.18, r_0: 79.25, f1_0: 74.74,            
+p_1: 80.94, r_1: 72.63, f1_1: 76.37
+[2020-05-30 00:27:54.631244] percentage vars: 0.8 mean - acc: 80.26, f1_0: 79.17, f1_1: 81.04, p_0: 75.23, p1: 85.99
+percentage vars: 0.8 std - acc: 1.61, f1_0: 2.27, f1_1: 2.08, p_0: 2.93, p1: 3.35
+
+percentage vars: 0.9 mean - acc: 77.60, f1_0: 77.30, f1_1: 77.62, p_0: 72.37, p1: 84.49
+percentage vars: 0.9 std - acc: 1.59, f1_0: 2.66, f1_1: 2.19, p_0: 2.85, p1: 4.10
+
+percentage vars: 0.95 mean - acc: 76.55, f1_0: 75.93, f1_1: 76.97, p_0: 71.73, p1: 82.42
+percentage vars: 0.95 std - acc: 1.55, f1_0: 2.74, f1_1: 1.70, p_0: 2.52, p1: 3.55
+
+percentage vars: 1 mean - acc: 75.66, f1_0: 74.74, f1_1: 76.37, p_0: 71.18, p1: 80.94
+percentage vars: 1 std - acc: 1.57, f1_0: 2.84, f1_1: 1.56, p_0: 2.55, p1: 3.49
+
+

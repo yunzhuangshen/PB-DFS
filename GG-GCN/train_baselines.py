@@ -14,7 +14,7 @@ from sklearn.ensemble import ExtraTreesRegressor
 import xgboost as xgb
 
 def load_data(prob_folder, train_size=500):
-    rng = np.random.RandomState(args.seed)
+    rng = np.random.RandomState(0)
     files = rng.permutation(list(pathlib.Path(prob_folder).glob('sample_*.pkl')))
 
     def load(begin, to):
@@ -37,41 +37,26 @@ if __name__ == '__main__':
     parser.add_argument(
         'problem',
         help='MILP instance type to process.',
-        choices=['tsp', 'vrp', 'sc', 'mis', 'ca', 'ds', 'vc'],
+        choices=['mis', 'ca', 'ds', 'vc'],
     )
 
     parser.add_argument(
         '-m', '--model',
         help='Model to be trained.',
         type=str,
-        choices=['lr', 'xgb', 'svmlinear'],
-        default='lr'
-    )
-
-    parser.add_argument(
-        '-s', '--seed',
-        help='Random generator seed.',
-        default=0,
+        choices=['lr', 'xgb'],
     )
 
     args = parser.parse_args()
     home = os.path.expanduser("~")
-    
-    data_dirs = {
-        'tsp': 'train_50-100', 'vrp': 'train_16-25', 
-        'mis': 'train_500-1000', 'sc': 'train_750_550_1.5',
-        'ca': 'train_100-500-1.5',
-        'ds': 'train_500-1000',
-        'vc': 'train_500-1000',
-    }
 
-    data_path =  os.path.join(home, f"storage1/instances/{args.problem}/{data_dirs[args.problem]}")
-    running_dir = os.path.join(home, f"storage/trained_models/{args.problem}/{data_dirs[args.problem]}/{args.model}")
+    data_path =  f'../datasets/{args.problem}/train'
+    running_dir = f'../trained_models/{args.problem}/{args.model}'
     os.makedirs(running_dir, exist_ok=True)
 
     logfile = f"{running_dir}/log.txt"
     if args.model in ['lr', 'xgb']:
-        log(f"Logfile for {args.model} model on {args.problem} with seed {args.seed}", logfile)
+        log(f"Logfile for {args.model} model on {args.problem}", logfile)
         log(f"training files from {data_path}")
         log(f"model saves to {running_dir}")
 
@@ -87,4 +72,4 @@ if __name__ == '__main__':
         model.fit(train_xs, train_ys)
         with open(f"{running_dir}/model.pkl", "wb") as file:
             pickle.dump(model, file)
-        log(f"Done training, model saves to {running_dir}/model.pkl", logfile)
+        log(f"Done training", logfile)
