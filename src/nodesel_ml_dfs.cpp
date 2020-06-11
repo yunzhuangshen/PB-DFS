@@ -45,6 +45,7 @@ SCIP_DECL_NODESELCOMP(COML::Nodesel_ML_DFS::scip_comp)
       unsigned int node2_bd_type = node2->domchg->domchgbound.boundchgs[0].boundtype;
       if (gconf.policy==Policy::ML_DFS_HEUR_SCORE1_GCN ||
             gconf.policy==Policy::ML_DFS_EXACT_SCORE1_GCN || 
+            gconf.policy==Policy::ML_DFS_HEUR_SCORE1_LR || 
             gconf.policy == Policy::SCIP_DEF_PBDFS)
       {
 
@@ -55,8 +56,7 @@ SCIP_DECL_NODESELCOMP(COML::Nodesel_ML_DFS::scip_comp)
          else
             return 0;
       } 
-      else if (gconf.policy==Policy::ML_DFS_HEUR_SCORE3_GCN||
-                  gconf.policy==Policy::ML_DFS_EXACT_SCORE3_GCN)
+      else if (gconf.policy==Policy::ML_DFS_EXACT_SCORE3_GCN)
       {
 
          if (node1_bd_type == SCIP_BOUNDTYPE_LOWER)

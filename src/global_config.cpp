@@ -35,25 +35,25 @@ void COML::Global_config::init(Policy policy, int prob_type, double cutoff_time,
     if (policy == Policy::SCIP_AGG) pname = "scip_agg";
     else if (policy == Policy::SCIP_DEF) pname = "scip_def";
     else if (policy == Policy::SCIP_DEF_PBDFS) pname = "scip_def_pbdfs";
-    else if (policy == Policy::ML_DING) pname = "ml_ding";
+    else if (policy == Policy::ML_DING) pname = "ml_split";
     else if (policy == Policy::ML_DFS_HEUR_SCORE1_GCN)
     {
         if (this->cutoff <= 100)
-            pname = "ml_dfs1_gcn_" + std::to_string(_cutoff);
+            pname = "pbdfs1_gcn_" + std::to_string(_cutoff);
         else
-            pname = "ml_dfs1_gcn";
+            pname = "pbdfs1_gcn";
     }
     else if (policy == Policy::ML_DFS_HEUR_SCORE2_GCN){
         if (this->cutoff <= 100)
-            pname = "ml_dfs2_gcn_" + std::to_string(_cutoff);
+            pname = "pbdfs2_gcn_" + std::to_string(_cutoff);
         else
-            pname = "ml_dfs2_gcn";
+            pname = "pbdfs2_gcn";
     } 
-    else if (policy == Policy::ML_DFS_HEUR_SCORE3_GCN){
+    else if (policy == Policy::ML_DFS_HEUR_SCORE1_LR){
         if (this->cutoff <= 100)
-            pname = "ml_dfs3_gcn_" + std::to_string(_cutoff);
+            pname = "pbdfs1_lr_" + std::to_string(_cutoff);
         else
-            pname = "ml_dfs3_gcn";
+            pname = "pbdfs1_lr";
     }     else if (policy == Policy::ML_DFS_EXACT_SCORE1_GCN)
     {
         if (this->cutoff <= 100)
@@ -75,9 +75,9 @@ void COML::Global_config::init(Policy policy, int prob_type, double cutoff_time,
     } 
     else if (policy == Policy::ML_DFS_HEUR_SCORE2_LR){
         if (this->cutoff <= 100)
-            pname = "ml_dfs2_lr_" + std::to_string(_cutoff);
+            pname = "pbdfs2_lr_" + std::to_string(_cutoff);
         else
-            pname = "ml_dfs2_lr";
+            pname = "pbdfs2_lr";
     } 
     else if (policy == Policy::SCIP_HEUR_ALL_ROUNDING) pname = "heur_all_rounding";
     else if (policy == Policy::SCIP_HEUR_ALL_DIVING) pname = "heur_all_diving";
@@ -98,10 +98,10 @@ void COML::Global_config::init(Policy policy, int prob_type, double cutoff_time,
     default: throw std::runtime_error("unrecognized problem type!\n");
     }
 
-    this->DATA_BASE_DIR = (home_dir + "/storage1/instances/" + prob_str + "/");
-    this->LOG_DIR = home_dir + "/storage/ret_optsol/" + prob_str + "/" + pname + "/"; 
-    COML::create_dir(home_dir + "/storage/ret_optsol/");
-    COML::create_dir(home_dir + "/storage/ret_optsol/" + prob_str);
+    this->DATA_BASE_DIR = ("./datasets/" + prob_str + "/");
+    this->LOG_DIR = "./ret_solver/" + prob_str + "/" + pname + "/"; 
+    COML::create_dir("./ret_solver/");
+    COML::create_dir("./ret_solver/" + prob_str);
     COML::create_dir(this->LOG_DIR);
 
     std::string info(

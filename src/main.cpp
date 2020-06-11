@@ -74,7 +74,7 @@ int main(int argc, char* argv[]) {
         case 2: p = Policy::ML_DING; break;
         case 3: p = Policy::ML_DFS_HEUR_SCORE1_GCN; break;
         case 4: p = Policy::ML_DFS_HEUR_SCORE2_GCN; break;
-        case 5: p = Policy::ML_DFS_HEUR_SCORE3_GCN; break;
+        case 5: p = Policy::ML_DFS_HEUR_SCORE1_LR; break;
         case 6: p = Policy::ML_DFS_HEUR_SCORE2_LR; break;
         case 7: p = Policy::SCIP_HEUR_FEASPUMP; break;
         case 8: p = Policy::SCIP_HEUR_RENS; break;    
@@ -93,47 +93,11 @@ int main(int argc, char* argv[]) {
     gconf.init(p, param_prob_type, param_cutoff, split_id);
 
     // specify testing & training graphs; optimal solutions for the training graphs must be provided.
-    std::vector<std::string> train_files; std::vector<std::string> test_files;
-    switch (gconf.prob)
-    {
-    case 0: //MIS problem
-        for (int i = 0; i < 30; i++){
-            test_files.push_back("eval_3000/" + std::to_string(i));
-        }
-        break;
-    case 1: // Setcover problem
-        for (int i = 0; i < 30; i++){
-            test_files.push_back("eval_2250_1750/" + std::to_string(i));
-        }
-        break;
-
-    case 2: // TSP
-        for (int i = 0; i < 30; i++){
-            test_files.push_back("eval_150/" + std::to_string(i));
-        } 
-        break;
-    case 3: // vrp
-        for (int i = 0; i < 30; i++){
-            test_files.push_back("eval_50/" + std::to_string(i));
-        }
-        break;
-    case 4: // vc
-        for (int i = 0; i < 30; i++){
-            test_files.push_back("eval_3000/" + std::to_string(i));
-        }
-        break;
-    case 5: // dominate set
-        for (int i = 0; i < 30; i++){
-            test_files.push_back("eval_3000/" + std::to_string(i));
-        }
-        break;
-    case 6: // ca
-        for (int i = 0; i < 30; i++){
-            test_files.push_back("eval_300-1500/" + std::to_string(i));
-        }
-        break;
-    default: throw std::runtime_error("unknown problem\n");
+    std::vector<std::string> test_files;
+    for (int i = 0; i < 30; i++){
+        test_files.push_back("eval_large/" + std::to_string(i));
     }
+        
 
     for (auto test_file : test_files)
     {   

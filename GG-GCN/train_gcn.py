@@ -56,12 +56,12 @@ if __name__ == '__main__':
     )
 
     args = parser.parse_args()
-    home = expanduser("~")
-    save_model_to = f'../trained_models/{args.problem}/GG-GCN'
+    filedir = os.path.dirname(__file__)
+    save_model_to = f'{filedir}/../trained_models/{args.problem}/GG-GCN'
     os.makedirs(save_model_to, exist_ok=True)
     
     ####### data #######
-    data_path = f"../datasets/{args.problem}/train"    
+    data_path = f"{filedir}/../datasets/{args.problem}/train"    
     data_files = list(pathlib.Path(data_path).glob('sample_*.pkl'))
     data_files = [str(data_file) for data_file in data_files][:500]
     

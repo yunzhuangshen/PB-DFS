@@ -86,23 +86,23 @@ if __name__ == '__main__':
     model = model_func(placeholders, input_dim=N_bd, logging=True)
 
     args = parser.parse_args()
-    home = expanduser("~")
-    model_dir = os.path.join(home, f'../trained_models/{args.problem}/GG-GCN')
+    filedir = os.path.dirname(__file__)
+    model_dir = f'{filedir}/../trained_models/{args.problem}/GG-GCN'
 
-    data_path = f'../datasets/{args.problem}/eval_large'
+    data_path = f'{filedir}/../datasets/{args.problem}/eval_large'
     data_files = [f'{data_path}/sample_{i}.pkl' for i in range(30)]
 
     saver=tf.train.Saver(max_to_keep=1000)
     sess.run(tf.global_variables_initializer())
     ckpt=tf.train.get_checkpoint_state(model_dir)
     print('loaded '+ckpt.model_checkpoint_path)
-    saver.restore(sess,os.path.join(home, ckpt.model_checkpoint_path))
+    saver.restore(sess,ckpt.model_checkpoint_path)
 
     t1 = time.time()
     ct=0
     for data_file in data_files:
         print('processing data file ' + data_file + '\n')
-        data = read_data_general(data_file, lp_feat = (args.feature =='lp'))
+        data = read_data_general(data_file, lp_feat=True)
 
         ct += 1
         xs, ys, adj, names, = data

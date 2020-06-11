@@ -5,7 +5,7 @@ import shutil
 import numpy as np
 from scipy.stats.mstats import gmean
 
-def analyse(datedir, problem):
+def analyse(ret_dir, problem):
 
     def geo_mean(arr, mask=None):
         if mask is None:
@@ -16,7 +16,7 @@ def analyse(datedir, problem):
         log_a = np.log(arr+shift)
         return np.abs(np.exp(log_a.mean(axis=0)) - shift)
 
-    prob_dir = f'/home/joey/projects/co_heur_ret/{datedir}/{problem}' 
+    prob_dir = f'{ret_dir}/{problem}' 
     methods = [sub_dir for sub_dir in os.listdir(prob_dir) if os.path.isdir(os.path.join(prob_dir, sub_dir))]
     method_dir_paths = [os.path.join(prob_dir, sub_dir) for sub_dir in methods]
     dfs = []
@@ -64,8 +64,10 @@ def analyse(datedir, problem):
         print("\n")
 if __name__ == '__main__':
 
-    datedir = '05-Jun-2020'
-    problems = ['ds']
-
-    for problem in problems:
-        analyse(datedir, problem)
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        'problem',
+        choices=['mis', 'vc', 'ds', 'ca'],
+    )
+    args = parser.parse_args()
+    analyse('ret_solver', args.problem)

@@ -235,7 +235,7 @@ def calc_classification_metrics(y_true, y_pred, ncands=None, threshold=0.5):
     line = f'acc: {mean_stats[0]:0.2f}, ap: {mean_stats[1]:0.2f}\
             \np_0: {mean_stats[2]:0.2f}, r_0: {mean_stats[3]:0.2f}, f1_0: {mean_stats[4]:0.2f},\
             \np_1: {mean_stats[5]:0.2f}, r_1: {mean_stats[6]:0.2f}, f1_1: {mean_stats[7]:0.2f}'
-    line += f"\n APs: {','.join(APs)}"
+    # line += f"\n APs: {','.join(APs)}"
     return line, mean_stats
 
 
@@ -308,7 +308,6 @@ def calc_classification_metrics(y_true, y_pred, ncands=None, threshold=0.5):
 def load_samples(filenames, logfile=None):
     x, y, ncands = [], [], []
     total_ncands = 0
-    print(len(filenames))
     for i, filename in enumerate(filenames):
         # try:
         cand_x, cand_y = load_flat_samples(filename, augment_feats=False, normalize_feats=True)

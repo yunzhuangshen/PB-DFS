@@ -75,6 +75,7 @@ SCIP_DECL_BRANCHEXECLP(COML::Branching_dfs::scip_execlp)
       char var_short_name[10];
       int prefix_remove =  gconf.prefix_size_remove + 2;
       if (gconf.policy==Policy::ML_DFS_HEUR_SCORE1_GCN ||
+         gconf.policy==Policy::ML_DFS_HEUR_SCORE1_LR ||
             gconf.policy == Policy::SCIP_DEF_PBDFS)
       {
          for (int i = 0; i < nlpcands; i++)
@@ -93,24 +94,24 @@ SCIP_DECL_BRANCHEXECLP(COML::Branching_dfs::scip_execlp)
             }
          }
       } 
-      else if (gconf.policy==Policy::ML_DFS_HEUR_SCORE3_GCN)
-      {
-         for (int i = 0; i < nlpcands; i++)
-         {
-            var_name = SCIPvarGetName(lpcands[i]);
-            strcpy(var_short_name, var_name + prefix_remove);
+      // else if (gconf.policy==Policy::ML_DFS_HEUR_SCORE3_GCN)
+      // {
+      //    for (int i = 0; i < nlpcands; i++)
+      //    {
+      //       var_name = SCIPvarGetName(lpcands[i]);
+      //       strcpy(var_short_name, var_name + prefix_remove);
 
-            if (gconf.var_mapper.find(var_short_name) == gconf.var_mapper.end())
-            {
-               cands_ml_score[i] = 0;
-            }
-            else
-            {
-               var_idx = gconf.var_mapper[var_short_name];
-               cands_ml_score[i] = 1-gconf.ml_scores1[var_idx];
-            }
-         }
-      }
+      //       if (gconf.var_mapper.find(var_short_name) == gconf.var_mapper.end())
+      //       {
+      //          cands_ml_score[i] = 0;
+      //       }
+      //       else
+      //       {
+      //          var_idx = gconf.var_mapper[var_short_name];
+      //          cands_ml_score[i] = 1-gconf.ml_scores1[var_idx];
+      //       }
+      //    }
+      // }
       else if (gconf.policy==Policy::ML_DFS_HEUR_SCORE2_GCN ||
                   gconf.policy==Policy::ML_DFS_HEUR_SCORE2_LR)
       {

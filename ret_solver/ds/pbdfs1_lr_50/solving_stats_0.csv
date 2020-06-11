@@ -1,0 +1,9 @@
+instance_id,status,opt_gap,best_sol_obj,best_sol_time,best_sol_heur,best_heur_sol_obj,best_heur_sol_time,heur_ncalls,heur_tot_time
+eval_large/0,unsolved,0.0570392,318,11.3366,mldfs,318,11.3366,1,11.3325
+eval_large/1,unsolved,0.0579198,316,10.8578,mldfs,316,10.8578,1,10.8624
+eval_large/2,unsolved,0.0447578,314,46.7467,none,315,8.01084,1,8.00905
+eval_large/3,unsolved,0.0563501,318,7.78114,mldfs,318,7.78114,1,7.7855
+eval_large/4,unsolved,0.0575152,315,8.60108,mldfs,315,8.60108,1,8.64067
+eval_large/5,unsolved,0.0632536,334,14.6726,mldfs,334,14.6726,1,14.6773
+eval_large/6,unsolved,0.0569117,325,13.9496,mldfs,325,13.9496,1,13.9544
+eval_large/7,unsolved,0.0504179,313,10.2761,mldfs,313,10.2761,1,10.2786

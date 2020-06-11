@@ -59,7 +59,7 @@ COML::SCIP_Solver::SCIP_Solver()
 
    if (gconf.policy == Policy::ML_DFS_HEUR_SCORE1_GCN ||
                gconf.policy == Policy::ML_DFS_HEUR_SCORE2_GCN || 
-               gconf.policy == Policy::ML_DFS_HEUR_SCORE3_GCN ||
+               gconf.policy == Policy::ML_DFS_HEUR_SCORE1_LR ||
                gconf.policy == Policy::ML_DFS_HEUR_SCORE2_LR)
    {
       SCIPincludeHeurMLdfs(scip);
@@ -123,7 +123,8 @@ COML::SCIP_Solver::SCIP_Solver()
          SCIPincludeHeurFeaspump(scip);     // SCIP_HEURTIMING_AFTERLPPLUNGE freq 20
       else if (gconf.policy == Policy::SCIP_HEUR_RENS)
          SCIPincludeHeurRens(scip);         // SCIP_HEURTIMING_AFTERLPNODE freq 0
-      else throw std::runtime_error("unrecognized policy in scip_solver!\n");
+      else if (gconf.policy != Policy::ML_DING) 
+         throw std::runtime_error("unrecognized policy in scip_solver!\n");
    }
 
    // disable scip output to stdout

@@ -29,7 +29,6 @@ def load_data(prob_folder, logfile):
 
 if __name__ == '__main__':
 
-    home = os.path.expanduser("~")
     parser = argparse.ArgumentParser()
     parser.add_argument(
         'problem',
@@ -43,13 +42,14 @@ if __name__ == '__main__':
     )
 
     args = parser.parse_args()
-    running_dir = f'../trained_models/{args.problem}/{args.model}')
+    filedir = os.path.dirname(__file__)
+    running_dir = f'{filedir}/../trained_models/{args.problem}/{args.model}'
 
 
     for data_dir in ['test_small', 'test_medium']:
-        data_path = f'../datasets/{args.problem}/{data_dir}'
-        os.makedirs(f'../ret_model', exist_ok=True)
-        logfile = f'../ret_model/{args.problem}_{data_dir}_{args.model}.txt'
+        data_path = f'{filedir}/../datasets/{args.problem}/{data_dir}'
+        os.makedirs(f'{filedir}/../ret_model', exist_ok=True)
+        logfile = f'{filedir}/../ret_model/{args.problem}_{data_dir}_{args.model}.txt'
 
         # load model
         with open(f"{running_dir}/model.pkl", 'rb') as f:

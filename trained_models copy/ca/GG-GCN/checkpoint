@@ -1,2 +1,0 @@
-model_checkpoint_path: "/home/ubuntu/storage/trained_models/ca/train_100-500-1.5/gcng_lp/model.ckpt"
-all_model_checkpoint_paths: "/home/ubuntu/storage/trained_models/ca/train_100-500-1.5/gcng_lp/model.ckpt"

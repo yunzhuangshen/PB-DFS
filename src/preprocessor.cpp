@@ -16,7 +16,7 @@ namespace COML {
         boost::split(result, gconf.cur_prob, boost::is_any_of("/")); 
 
         std::string output_s;
-        if (branching_policy == 2 || branching_policy == 3 || branching_policy == 4 || branching_policy == 5 ||
+        if (branching_policy == 2 || branching_policy == 3 || branching_policy == 4 ||
             branching_policy == 11 || branching_policy == 12 || branching_policy ==13 || branching_policy ==14){
             output_s = gconf.DATA_BASE_DIR + result[0] + "/" +  "sample_" + result[1] + ".prob";
         }else 

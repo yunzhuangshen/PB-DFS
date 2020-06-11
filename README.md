@@ -9,17 +9,19 @@ This repository contains the experiment code for the paper submission: Learning 
 1. We use python version 3.6.9.
 2. Install python3-venv by 'sudo apt-get install python3-venv'
 3. We need to create two virtual environments that contain different version of tensorflow, namely tf1 and tf2.
-4. Under the environment tf1, run 'pip3 install -r requirements_1.txt'
-5. Under the environment tf2, run 'pip3 install -r requirements_2.txt'
+4. Make sure the cmake version >= 3.15
+5. Make sure pip is upgraded to the latest version under both environments, 'pip3 install -U pip' 
+5. Under the environment tf1, run 'pip3 install -r requirements_1.txt'
+6. Under the environment tf2, run 'pip3 install -r requirements_2.txt'
 
 #### C++ Code Dependencies
 1. C++ boost library is required. The library can be downloaded here https://www.boost.org/users/download/.
 2. SCIP solver **version 6.0.1** is required, which can be downloaded at https://www.scipopt.org/index.php#download. An academic license can be applied from https://www.scipopt.org/index.php#license.
-3. After the setup, build the c++ code with cmake by 'cd build && cmake ../ && make -j4' to obtain the execuable 'CO'.
+3. After the setup, build the c++ code with cmake to obtain the execuable 'CO'.
 
 
 #### Data Dependencies
-The data is available at . The datasets repository should be put under the root directory of the project.
+The data is available at https://zenodo.org/record/3889802#.XuIQGJYRU5k. The folder 'datasets' repository should be put under the root directory of the project.
 
 ## Model Training
 
@@ -29,7 +31,8 @@ The data is available at . The datasets repository should be put under the root 
 
 ## Pre-trained Models
 
-We provide the pre-trained models for each problem under the folder 'trained_models'
+The training for lr takes seconds; XGBoost takes minutes; GG-GCN takes hours; TRIG-GCN takes several days.
+Thus, we provide the pre-trained models for each problem under the folder 'trained_models'
 
 ## Model Testing
 
@@ -41,8 +44,8 @@ The testing results is output to the folder 'ret_model'. These results correspon
 
 ## Evaluation of Heuristics
 
-- Run the bash script './model_predict.sh' to produce solution predictions for the proposed heuristic.
+- Run the bash script './model_predict.sh' to produce solution predictions for the proposed heuristic. Or skip this step and use the provided solution predictions in the dataset.
 
-- Run the bash script ./heur_eval.sh. It takes several hours to obtain the results.
+- Run the bash script ./heur_eval.sh. It takes several hours to obtain the results. Please note that if each process should run on a single cpu.
 
-- Upon the previous step is finished, run the python script 'stats.py' to generate the mean statistics, which is output to folder 'ret_solver'. These results correspond to the statistics in Table 2 and Table 3 of our paper. 
+- Upon the previous step is finished, run the python script 'stats.py' (under tf1 environment) to generate the mean statistics, which is output to folder 'ret_solver'. These results correspond to the statistics in Table 2 and Table 3 of our paper. 

@@ -50,8 +50,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
     home = os.path.expanduser("~")
 
-    data_path =  f'../datasets/{args.problem}/train'
-    running_dir = f'../trained_models/{args.problem}/{args.model}'
+    filedir = os.path.dirname(__file__)
+    data_path =  f'{filedir}/../datasets/{args.problem}/train'
+    running_dir = f'{filedir}/../trained_models/{args.problem}/{args.model}'
     os.makedirs(running_dir, exist_ok=True)
 
     logfile = f"{running_dir}/log.txt"

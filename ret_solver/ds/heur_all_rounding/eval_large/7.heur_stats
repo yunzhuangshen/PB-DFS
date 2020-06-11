@@ -1,0 +1,8 @@
+name,nbestsol,nsol,ncalls,time
+intshifting,0,0,0,0
+shiftandpropagate,1,1,1,0.0391
+simplerounding,1,52,53,0.044912
+randrounding,0,0,4,0.155545
+zirounding,15,52,52,0.116257
+rounding,1,1,52,0.704418
+shifting,1,1,6,0.088636

@@ -28,7 +28,8 @@ def load_data(filepath):
 
 if __name__ == '__main__':
 
-    home = os.path.expanduser("~")
+    filedir = os.path.dirname(__file__)
+
     parser = argparse.ArgumentParser()
     parser.add_argument(
         'problem',
@@ -42,9 +43,9 @@ if __name__ == '__main__':
     )
 
     args = parser.parse_args()
-    running_dir = f'../trained_models/{args.problem}/{args.model}')
+    running_dir = f'{filedir}/../trained_models/{args.problem}/{args.model}'
 
-    data_path =f'../datasets/{args.problem}/eval_large'   
+    data_path =f'{filedir}/../datasets/{args.problem}/eval_large'   
     files = list(pathlib.Path(data_path).glob('sample_*.pkl'))
 
     # load model

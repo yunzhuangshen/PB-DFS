@@ -35,8 +35,8 @@ if __name__ == '__main__':
     )
 
     args = parser.parse_args()
-    home = expanduser("~")
-    model_dir = f'../trained_models/{args.problem}/GG-GCN'
+    filedir = os.path.dirname(__file__)
+    model_dir = f'{filedir}/../trained_models/{args.problem}/GG-GCN'
 
     # Settings
     feat_dim = 57
@@ -95,11 +95,11 @@ if __name__ == '__main__':
     ####### data #######
 
     for data_dir in ["test_small", 'test_medium']:
-        data_path = f'../datasets/{args.problem}/{data_dir}'    
+        data_path = f'{filedir}/../datasets/{args.problem}/{data_dir}'    
         data_files = list(pathlib.Path(data_path).glob('sample_*.pkl'))
         data_files = [str(data_file) for data_file in data_files][:100]
-        os.makedirs(f'../ret_model', exist_ok=True)
-        logfile = f'../ret_model/{args.problem}_{data_dir}_GG_GCN.txt'
+        os.makedirs(f'{filedir}/../ret_model', exist_ok=True)
+        logfile = f'{filedir}/../ret_model/{args.problem}_{data_dir}_GG_GCN.txt'
         nsamples = len(data_files)
         
         log(f'test dataset: <{data_path}>, number of instances: {nsamples}', logfile)
