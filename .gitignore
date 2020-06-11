@@ -1,0 +1,9 @@
+**/trained_models
+**/datasets
+**/*.nohup
+**/*.pyc
+**/__pycache__
+**/build
+**/*.out
+**/*.txt
+**/*.sh
