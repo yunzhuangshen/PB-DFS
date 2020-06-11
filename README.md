@@ -41,6 +41,8 @@ The testing results is output to the folder 'ret_model'. These results correspon
 
 ## Evaluation of Heuristics
 
+- Run the bash script './model_predict.sh' to produce solution predictions for the proposed heuristic.
+
 - Run the bash script ./heur_eval.sh. It takes several hours to obtain the results.
 
 - Upon the previous step is finished, run the python script 'stats.py' to generate the mean statistics, which is output to folder 'ret_solver'. These results correspond to the statistics in Table 2 and Table 3 of our paper. 
