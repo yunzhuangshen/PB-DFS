@@ -36,9 +36,9 @@ Thus, we provide the pre-trained models for each problem under the folder 'train
 
 ## Model Testing
 
-- To test GG-GCN, XGBoost, and LR models, we first activate the tf1 environment. Then run the bash script './model_test.sh'.
+- To test GG-GCN, XGBoost, and LR models, activate the tf1 environment. Then run the bash script './model_test.sh'.
 
-- To test TRIG-GCN model, we active the tf2 environment. Then run the bash script './model_test_trig_gcn.sh'.
+- To test TRIG-GCN model, active the tf2 environment. Then run the bash script './model_test_trig_gcn.sh'.
 
 The testing results is output to the folder 'ret_model'. These results corresponds to the results presented in Table 1 of our paper.
 

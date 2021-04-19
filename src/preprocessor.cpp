@@ -12,27 +12,18 @@ namespace COML {
     void Preprocessor::load_prob_map_gcn(std::unordered_map<std::string, int>& mapper, 
                         int branching_policy ){        
         
-        std::vector<std::string> result; 
-        boost::split(result, gconf.cur_prob, boost::is_any_of("/")); 
-
-        std::string output_s;
-        if (branching_policy == 2 || branching_policy == 3 || branching_policy == 4 ||
-            branching_policy == 11 || branching_policy == 12 || branching_policy ==13 || branching_policy ==14){
-            output_s = gconf.DATA_BASE_DIR + result[0] + "/" +  "sample_" + result[1] + ".prob";
-        }else 
-            output_s = gconf.DATA_BASE_DIR + result[0] + "/" +  "sample_" + result[1] + ".lr_prob";
-        std::ifstream predicted_file(output_s);
+        std::ifstream predicted_file("tmp.prob");
         if (! predicted_file){
-            std::cout << "fail to read the predicted file \n" << output_s << std::endl;
+            std::cout << "fail to read the predicted file \n" << std::endl;
             exit(-1);
         }
-        printf("read file: %s\n", output_s.c_str());
         std::string varname1;
         std::string varname2;
 
         double prob;
 
         int idx = 0;
+        std::string result;
         while (predicted_file >> varname1 >> prob){
              //edge-based symetric
             if (strcmp(gconf.prob_str.c_str(), "tsp") == 0 || strcmp(gconf.prob_str.c_str(), "vrp") == 0){   
