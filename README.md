@@ -1,8 +1,5 @@
 # Learning Primal Heuristics for Mixed Integer Programs
 
-This repository contains the experiment code for the paper submission: Learning Primal Heuristics for Mixed Integer Programs
-
-
 ## Requirements
 
 #### Python Code Dependencies 
@@ -20,25 +17,20 @@ This repository contains the experiment code for the paper submission: Learning 
 3. After the setup, build the c++ code with cmake to obtain the execuable 'CO'.
 
 
-#### Data Dependencies
-The data is available at https://zenodo.org/record/3889802#.XuIQGJYRU5k. The folder 'datasets' repository should be put under the root directory of the project.
+#### Data and Pretrained Models
+Please request access to the full codebase at https://drive.google.com/file/d/1y-y_sijEoR8eYVFJsUpM9FXIgLNajCCQ/view?usp=sharing.
 
 ## Model Training
 
-- To train GG-GCN, XGBoost, and LR models, we first activate the tf1 environment. Then run the bash script ./model_train.sh.
+- To train GG-GCN, XGBoost, and LR models, activate the tf1 environment and then run the bash script ./model_train.sh.
 
-- To train TRIG-GCN model, we active the tf2 environment. Then run the bash script ./model_train_trig_gcn.sh
-
-## Pre-trained Models
-
-The training for lr takes seconds; XGBoost takes minutes; GG-GCN takes hours; TRIG-GCN takes several days.
-Thus, we provide the pre-trained models for each problem under the folder 'trained_models'
+- To train TRIG-GCN model, active the tf2 environment and then run the bash script ./model_train_trig_gcn.sh
 
 ## Model Testing
 
-- To test GG-GCN, XGBoost, and LR models, activate the tf1 environment. Then run the bash script './model_test.sh'.
+- To test GG-GCN, XGBoost, and LR models, activate the tf1 environment and then run the bash script './model_test.sh'.
 
-- To test TRIG-GCN model, active the tf2 environment. Then run the bash script './model_test_trig_gcn.sh'.
+- To test TRIG-GCN model, active the tf2 environment and then hen run the bash script './model_test_trig_gcn.sh'.
 
 The testing results is output to the folder 'ret_model'. These results corresponds to the results presented in Table 1 of our paper.
 
