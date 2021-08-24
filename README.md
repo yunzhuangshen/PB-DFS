@@ -3,13 +3,15 @@
 ## Requirements
 
 #### Python Code Dependencies 
-1. We use python version 3.6.9.
-2. Install python3-venv by 'sudo apt-get install python3-venv'
-3. We need to create two virtual environments that contain different version of tensorflow, namely tf1 and tf2.
-4. Make sure the cmake version >= 3.15
-5. Make sure pip is upgraded to the latest version under both environments, 'pip3 install -U pip' 
-5. Under the environment tf1, run 'pip3 install -r requirements_1.txt'
-6. Under the environment tf2, run 'pip3 install -r requirements_2.txt'
+1. Python version 3.6.9.
+2. Cuda version 10.0 (required by TRIG-GNN)
+3. Cmake version >= 3.15
+4. python3-venv (installed by running 'sudo apt-get install python3-venv')
+5. Two virtual environments that contain different version of tensorflow, tf1 and tf2. (created by running 'python3 -m venv [env_name]').
+6. Latest pip (upgraded by running 'pip3 install -U pip' 
+7. Install dependencies for the two environments:
+    - Activate the environment tf1 (source tf1/bin/activate), run 'pip3 install -r requirements_1.txt'
+    - Activate the environment tf2 (source tf2/bin/activate), run 'pip3 install -r requirements_2.txt'
 
 #### C++ Code Dependencies
 1. C++ boost library is required. The library can be downloaded here https://www.boost.org/users/download/.
@@ -17,8 +19,8 @@
 3. After the setup, build the c++ code with cmake to obtain the execuable 'CO'.
 
 
-#### Data and Pretrained Models
-Please request access to the full codebase at https://drive.google.com/file/d/1y-y_sijEoR8eYVFJsUpM9FXIgLNajCCQ/view?usp=sharing.
+#### Datasets
+Datasets are available at https://drive.google.com/file/d/1HBBdwtQ1fa31inb9wVNcT-Tslu4WAeny/view?usp=sharing. The code for generating data is also provided in the "data_generator" directory.
 
 ## Model Training
 
@@ -41,3 +43,8 @@ The testing results is output to the folder 'ret_model'. These results correspon
 - Run the bash script ./heur_eval.sh. It takes several hours to obtain the results. Please note that if each process should run on a single cpu. The intermediate results is output to the folder ret_solver.
 
 - Upon the previous step is finished, run the bash script './calc_stats.sh' (under tf1 environment) to generate the mean statistics, which is output to folder 'ret_solver'. These results correspond to the statistics in Table 2 and Table 3 of our paper. 
+
+## Some comments
+- Currently, the ML models are implemented in the python code, and their predictions are wrriten into the filesystem to be used by the scip implemented in C++.
+- If you need to predict and search interactively, you may want to have a look at "PySCIPOpt", which binds python and C++ using cython.    
+- If you have any questions, please contact me at shenyunzhuang@outlook.com. Hopefully, the code can be helpful for your own reasearch. 

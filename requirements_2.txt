@@ -1,0 +1,6 @@
+networkx==2.4
+numpy==1.18.3
+scikit-learn
+scipy==1.4.1
+sklearn
+tensorflow-gpu==2.0.0a0
