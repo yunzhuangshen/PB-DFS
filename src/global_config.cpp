@@ -17,12 +17,11 @@ COML::Global_config::Global_config()
         dual_bounds(), dual_time(), gaps(), gap_time(), prefix_size_remove(3)
 {}
 
-void COML::Global_config::init(Policy policy, int prob_type, double cutoff_time, int split_id, std::string log_dir)
+void COML::Global_config::init(Policy policy, int prob_type, double cutoff_time, int split_id)
 {
     const char *homedir;
     if ((homedir = getenv("HOME")) == NULL) 
         homedir = getpwuid(getuid())->pw_dir;
-    this->log_dir = log_dir;
     this->home_dir = homedir; 
     this->start_time_clock = currentDateTime();
     this->split_id = split_id;

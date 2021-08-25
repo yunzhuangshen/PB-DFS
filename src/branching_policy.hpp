@@ -37,7 +37,7 @@
 #include <scip/branch_relpscost.h>
 namespace COML{
 
-EXTERN
+
 SCIP_RETCODE SCIPincludeObjBranchrule_DB(
    SCIP*                 scip,               /**< SCIP data structure */
    scip::ObjBranchrule*  objbranchrule,      /**< branching rule object */

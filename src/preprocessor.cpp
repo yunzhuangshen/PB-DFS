@@ -23,7 +23,7 @@ namespace COML {
         double prob;
 
         int idx = 0;
-        std::string result;
+        std::vector<std::string> result;
         while (predicted_file >> varname1 >> prob){
              //edge-based symetric
             if (strcmp(gconf.prob_str.c_str(), "tsp") == 0 || strcmp(gconf.prob_str.c_str(), "vrp") == 0){   

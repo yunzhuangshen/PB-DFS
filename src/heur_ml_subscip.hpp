@@ -33,7 +33,6 @@
  *
  *  @ingroup PrimalHeuristicIncludes
  */
-EXTERN
 SCIP_RETCODE SCIPincludeHeurMLdfs(
    SCIP*                 scip                /**< SCIP data structure */
    );

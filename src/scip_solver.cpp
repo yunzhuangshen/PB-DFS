@@ -25,7 +25,6 @@
 #include "scip_exception.hpp"
 #include "global_config.hpp"
 #include "utils.hpp"
-#include "heur_ml_diving.hpp"
 #include "branching_policy.hpp"
 #include "heur_ml_subscip.hpp"
 
@@ -517,8 +516,8 @@ static SCIP_RETCODE includeSCIPotherPlugins(
    SCIP_CALL( SCIPincludePresolTworowbnd(scip) );
    SCIP_CALL( SCIPincludePresolSparsify(scip) );
    SCIP_CALL( SCIPincludePresolStuffing(scip) );
-   SCIP_CALL( SCIPincludePresolSymmetry(scip) );
-   SCIP_CALL( SCIPincludePresolSymbreak(scip) );   /* needs to be included after presol_symmetry */
+   // SCIP_CALL( SCIPincludePresolSymmetry(scip) );
+   // SCIP_CALL( SCIPincludePresolSymbreak(scip) );   /* needs to be included after presol_symmetry */
    SCIP_CALL( SCIPincludeNodeselBfs(scip) );
    SCIP_CALL( SCIPincludeNodeselBreadthfirst(scip) );
    SCIP_CALL( SCIPincludeNodeselDfs(scip) );
@@ -545,7 +544,7 @@ static SCIP_RETCODE includeSCIPotherPlugins(
    SCIP_CALL( SCIPincludePropDualfix(scip) );
    SCIP_CALL( SCIPincludePropGenvbounds(scip) );
    SCIP_CALL( SCIPincludePropObbt(scip) );
-   SCIP_CALL( SCIPincludePropOrbitalfixing(scip) );
+   // SCIP_CALL( SCIPincludePropOrbitalfixing(scip) );
    SCIP_CALL( SCIPincludePropNlobbt(scip) );
    SCIP_CALL( SCIPincludePropProbing(scip) );
    SCIP_CALL( SCIPincludePropPseudoobj(scip) );

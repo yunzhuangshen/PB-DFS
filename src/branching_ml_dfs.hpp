@@ -33,7 +33,6 @@
 
 namespace COML{
 
-EXTERN
 SCIP_RETCODE SCIPincludeObjBranchrule_MLDFS(
     SCIP *scip,                         /**< SCIP data structure */
     scip::ObjBranchrule *objbranchrule, /**< branching rule object */

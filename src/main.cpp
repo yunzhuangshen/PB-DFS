@@ -124,9 +124,9 @@ int main(int argc, char* argv[]) {
                 if (ml_scores2[i] < 0.5) ml_scores2[i] = 1 - ml_scores2[i];
             }
             
-            gconf.setup(test_file, nvars, ml_scores1, ml_scores2, 0);
+            gconf.setup(nvars, ml_scores1, ml_scores2, 0);
         }else
-            gconf.setup(test_file, 0, NULL, NULL, 0);
+            gconf.setup(0, NULL, NULL, 0);
 
         COML::SCIP_Solver solver;
         solver.solve();

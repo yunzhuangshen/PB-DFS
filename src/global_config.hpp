@@ -80,7 +80,7 @@ public:
     std::vector<double> gaps;
     std::vector<double> gap_time;
     void init(Policy policy, int prob_type, double cutoff_time, int split_id);
-    void setup(std::string prob_name, int nnodes, double* ml_scores1, double* ml_scores2, int seed);
+    void setup(int nnodes, double* ml_scores1, double* ml_scores2, int seed);
     void cleanup();    // must be used at the end 
     SCIP_RETCODE create_children_by_ml_local_cuts(SCIP* scip, 
                                 SCIP_NODE** left_child_ptr, SCIP_NODE** right_child_ptr, bool left_child_only);

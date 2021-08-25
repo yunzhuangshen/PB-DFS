@@ -281,7 +281,7 @@ SCIP_DECL_HEUREXEC(heurExecMLdfs)
    SCIP_CALL( SCIPhashmapCreate(&varmapfw, SCIPblkmem(subscip), nvars) );
    success = FALSE;
 
-   SCIPcopy(scip, subscip, varmapfw, NULL, "df", FALSE, FALSE, FALSE, NULL);
+   SCIPcopy(scip, subscip, varmapfw, NULL, "df", FALSE, FALSE, FALSE, 0, NULL);
 
    SCIP_CALL( SCIPallocBufferArray(scip, &subvars, nvars) );
    for (i = 0; i < nvars; ++i)
