@@ -1,7 +1,7 @@
 import os
 import sys
 import os
-sys.path.append( f'{os.path.dirname(os.path.realpath(__file__))}/../../gcng')
+sys.path.append( f'{os.path.dirname(os.path.realpath(__file__))}/../')
 
 import argparse
 import multiprocessing as mp
