@@ -20,7 +20,7 @@
 
 
 #### Datasets
-- Datasets are available at https://drive.google.com/file/d/1HBBdwtQ1fa31inb9wVNcT-Tslu4WAeny/view?usp=sharing.  
+Datasets are available at https://drive.google.com/file/d/1HBBdwtQ1fa31inb9wVNcT-Tslu4WAeny/view?usp=sharing.  
 
 
 ## Model Training
@@ -45,8 +45,8 @@ The testing results is output to the folder 'ret_model'. These results correspon
 
 - Upon the previous step is finished, run the bash script './calc_stats.sh' (under tf1 environment) to generate the mean statistics, which is output to folder 'ret_solver'. These results correspond to the statistics in Table 2 and Table 3 of our paper. 
 
-## Generate your own data
-- If you need to generate your own training/test instances, you can use the code in "data_generator" directory. Each problem directory contains two files:
+## Generating your own training/test problem instances
+- If you need to generate your own training and test instances, you can use the code in "data_generator" directory. Each problem directory contains two files:
 - gen_inst_*: generate problem instances with different parameters and/or solve problem instances (to obtaining optimal solutions for training an ML model).
 - make_sample_*: extract features for problem instances and make training data.
 
@@ -54,7 +54,7 @@ Two python packages are required for data generation:
 - gurobipy for solving training instances to optimality
 - PySCIPOpt for feature extraction. Note that to have the feature extraction code please install our version of PySCIPOpt included in this project, 
 
-## Some comments
+## FAQ
 - Currently, the ML models are implemented in the python code, and their predictions are wrriten into the filesystem to be used by the scip implemented in C++.
 - If you need to predict and search interactively, you may want to have a look at "PySCIPOpt", which binds python and C++ using cython.    
 - If you have any questions, please contact me at shenyunzhuang@outlook.com. Hopefully, the code can be helpful for your own reasearch. 
