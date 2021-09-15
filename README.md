@@ -20,7 +20,8 @@
 
 
 #### Datasets
-Datasets are available at https://drive.google.com/file/d/1HBBdwtQ1fa31inb9wVNcT-Tslu4WAeny/view?usp=sharing. The code for generating data is also provided in the "data_generator" directory.
+- Datasets are available at https://drive.google.com/file/d/1HBBdwtQ1fa31inb9wVNcT-Tslu4WAeny/view?usp=sharing.  
+
 
 ## Model Training
 
@@ -43,6 +44,15 @@ The testing results is output to the folder 'ret_model'. These results correspon
 - Run the bash script ./heur_eval.sh. It takes several hours to obtain the results. Please note that if each process should run on a single cpu. The intermediate results is output to the folder ret_solver.
 
 - Upon the previous step is finished, run the bash script './calc_stats.sh' (under tf1 environment) to generate the mean statistics, which is output to folder 'ret_solver'. These results correspond to the statistics in Table 2 and Table 3 of our paper. 
+
+## Generate your own data
+- If you need to generate your own training/test instances, you can use the code in "data_generator" directory. Each problem directory contains two files:
+- gen_inst_*: generate problem instances with different parameters and/or solve problem instances (to obtaining optimal solutions for training an ML model).
+- make_sample_*: extract features for problem instances and make training data.
+
+Two python packages are required for data generation:
+- gurobipy for solving training instances to optimality
+- PySCIPOpt for feature extraction. Note that to have the feature extraction code please install our version of PySCIPOpt included in this project, 
 
 ## Some comments
 - Currently, the ML models are implemented in the python code, and their predictions are wrriten into the filesystem to be used by the scip implemented in C++.
