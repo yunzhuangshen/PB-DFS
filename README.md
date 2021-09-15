@@ -47,12 +47,12 @@ The testing results is output to the folder 'ret_model'. These results correspon
 
 ## Generating your own training/test problem instances
 - If you need to generate your own training and test instances, you can use the code in "data_generator" directory. Each problem directory contains two files:
-- gen_inst_*: generate problem instances with different parameters and/or solve problem instances (to obtaining optimal solutions for training an ML model).
+- gen_inst_*: generate problem instances with different parameters and/or solve the problem instances to optimality.
 - make_sample_*: extract features for problem instances and make training data.
 
 Two python packages are required for data generation:
-- gurobipy for solving training instances to optimality
-- PySCIPOpt for feature extraction. Note that to have the feature extraction code please install our version of PySCIPOpt included in this project, 
+- gurobipy (for solving training instances to optimality).
+- PySCIPOpt (for feature extraction). Note that to have the feature extraction code please install our version of PySCIPOpt included in this project.
 
 ## FAQ
 - Currently, the ML models are implemented in the python code, and their predictions are wrriten into the filesystem to be used by the scip implemented in C++.
